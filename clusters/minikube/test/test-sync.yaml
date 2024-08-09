@@ -8,8 +8,6 @@ spec:
   interval: 1m0s
   ref:
     branch: main
-  secretRef:
-    name: my-nginx
   url: ssh://git@github.com/ygsa/flux2-kustomize-helm-example
 ---
 apiVersion: kustomize.toolkit.fluxcd.io/v1
