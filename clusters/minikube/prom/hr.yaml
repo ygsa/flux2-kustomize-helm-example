@@ -10,7 +10,7 @@ spec:
       sourceRef:
         kind: HelmRepository
         name: prometheus-community
-      version: 36.6.2
+      version: 69.4.1
   interval: 5m0s
   values:
     commonLabels:
@@ -66,7 +66,7 @@ spec:
         - cronjobs=[aaflamingo.net/business_line]
         - daemonsets=[aaflamingo.net/business_line]
         - statefulsets=[aaflamingo.net/business_line]
-        - hpa=[aaflamingo.net/business_line]
+        - horizontalpodautoscalers=[aaflamingo.net/business_line]
       prometheus:
         monitor:
           additionalLabels:
