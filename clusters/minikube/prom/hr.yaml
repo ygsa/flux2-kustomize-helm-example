@@ -1,0 +1,146 @@
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: test-monitor
+  namespace: test-monitor
+spec:
+  chart:
+    spec:
+      chart: kube-prometheus-stack
+      sourceRef:
+        kind: HelmRepository
+        name: prometheus-community
+      version: 36.6.2
+  interval: 5m0s
+  values:
+    commonLabels:
+      prometheus: test-monitor
+    kubeVersionOverride: v1.30.0
+    defaultRules:
+      rules:
+        etcd: false
+        kubeScheduler: false
+        kubeProxy: false
+        kubernetesApps: false
+        node: false
+        nodeExporterAlerting: false
+        nodeExporterRecording: false
+        network: false
+        kubernetesResources: false
+        kubernetesStorage: false
+    grafana:
+      enabled: false
+    alertmanager:
+      enabled: false
+    kubeApiServer:
+      enabled: true
+    kubelet:
+      enabled: true
+    kubeControllerManager:
+      enabled: false
+    coreDns:
+      enable: true
+    kubeDns:
+      enable: false
+    kubeEtcd:
+      enabled: false
+    kubeScheduler:
+      enabled: false
+    kubeProxy:
+      enabled: false
+    kubeStateMetrics:
+      enabled: true
+    kube-state-metrics:
+      resources:
+        requests:
+          cpu: 50m
+          memory: 50Mi
+      metricLabelsAllowlist:
+        - pods=[log-sidecar-inject,logSidecarInject]
+        - nodes=[dp.internal/pool]
+      metricAnnotationsAllowList:
+        - pods=[aaflamingo.net/business_line]
+        - ingresses=[aaflamingo.net/business_line]
+        - deployments=[aaflamingo.net/business_line]
+        - jobs=[aaflamingo.net/business_line]
+        - cronjobs=[aaflamingo.net/business_line]
+        - daemonsets=[aaflamingo.net/business_line]
+        - statefulsets=[aaflamingo.net/business_line]
+        - hpa=[aaflamingo.net/business_line]
+      prometheus:
+        monitor:
+          additionalLabels:
+            prometheus: test-monitor
+    nodeExporter:
+      enabled: true
+    prometheus-node-exporter:
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+              - matchExpressions:
+                  - key: type
+                    operator: DoesNotExist
+      prometheus:
+        monitor:
+          additionalLabels:
+            prometheus: test-monitor
+      resources:
+        requests:
+          cpu: 100m
+          memory: 30Mi
+    prometheusOperator:
+      enabled: true
+    prometheus:
+      enabled: true
+      thanosIngress:
+        enabled: true
+        ingressClassName: nginx
+        pathType: Prefix
+        annotations:
+          nginx.ingress.kubernetes.io/backend-protocol: "GRPC"
+        hosts:
+        - xxx.xxx.net
+        paths:
+        - /
+      prometheusSpec:
+        serviceMonitorSelector:
+          matchLabels:
+            prometheus: test-monitor
+        podMonitorSelector:
+          matchLabels:
+            prometheus: test-monitor
+        probeSelector:
+          matchLabels:
+            prometheus: test-monitor
+        ruleSelector:
+          matchLabels:
+            prometheus: test-monitor
+        scrapeInterval: "1m"
+        scrapeTimeout: "10s"
+        evaluationInterval: "1m"
+        alertingEndpoints:
+        - name: "alertmanager"
+          namespace: "alertmanager"
+          port: http
+          scheme: http
+        externalLabels:
+          cluster: PLACEHOLDER
+          region: PLACEHOLDER
+          environment: PLACEHOLDER
+        retention: 2d
+        storageSpec:
+          volumeClaimTemplate:
+            spec:
+              storageClassName: PLACEHOLDER
+              accessModes: ["ReadWriteOnce"]
+              resources:
+                requests:
+                  storage: 10Gi
+        thanos:
+          resources:
+            limits:
+              memory: 100Mi
+            requests:
+              cpu: 50m
+              memory: 100Mi
