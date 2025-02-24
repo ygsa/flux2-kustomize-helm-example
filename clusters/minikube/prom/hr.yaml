@@ -124,15 +124,11 @@ spec:
           namespace: "alertmanager"
           port: http
           scheme: http
-        externalLabels:
-          cluster: PLACEHOLDER
-          region: PLACEHOLDER
-          environment: PLACEHOLDER
         retention: 2d
         storageSpec:
           volumeClaimTemplate:
             spec:
-              storageClassName: PLACEHOLDER
+              storageClassName: standard
               accessModes: ["ReadWriteOnce"]
               resources:
                 requests:
