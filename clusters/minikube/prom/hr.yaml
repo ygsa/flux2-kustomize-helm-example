@@ -10,7 +10,7 @@ spec:
       sourceRef:
         kind: HelmRepository
         name: prometheus-community
-      version: 69.4.1
+      version: 36.6.2
   interval: 5m0s
   values:
     commonLabels:
