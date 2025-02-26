@@ -4,4 +4,8 @@ resources:
 - hr.yaml
 - ns.yaml
 - repo.yaml 
+patches:
+  - target:
+      kind: HelmRelease
+    path: container_network.patch.yaml
 
