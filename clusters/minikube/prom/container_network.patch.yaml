@@ -1,5 +1,5 @@
 - op: add
-  path: /spec/serviceMonitor/kubelet/cAdvisorMetricRelabelings/0
+  path: /spec/values/kubelet/serviceMonitor/cAdvisorMetricRelabelings/0
   value:
     - sourceLabels: [__name__, interface]
       action: drop
