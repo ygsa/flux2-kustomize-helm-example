@@ -7,5 +7,5 @@ resources:
 patches:
   - target:
       kind: HelmRelease
-    path: container_network.patch.yaml
+    path: kubectl.servicemonitor.patch.yaml
 
