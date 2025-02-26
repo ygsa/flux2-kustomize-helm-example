@@ -1,6 +1,6 @@
 - op: add
   path: /spec/values/kubelet/serviceMonitor/cAdvisorMetricRelabelings/0
   value:
-    - sourceLabels: [__name__, interface]
-      action: drop
-      regex: 'container_network_.*;(cali|cilium|cni|lxc|nodelocaldns|tunl).*'
+    sourceLabels: [__name__, interface]
+    action: keep
+    regex: 'container_network_.*;(cali|cilium|cni|lxc|nodelocaldns|tunl).*'
