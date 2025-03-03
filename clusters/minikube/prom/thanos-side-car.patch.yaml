@@ -1,3 +1,6 @@
-- op: replace
-  path: /spec/values/prometheusOperator/thanosImage/tag
-  value: v0.36.1
+- op: add
+  path: /spec/values/prometheusOperator/thanosImage
+  value: 
+    registry: quay.io
+    repository: thanos/thanos
+    tag: v0.36.1

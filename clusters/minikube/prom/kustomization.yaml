@@ -10,4 +10,4 @@ patches:
     path: kubectl.servicemonitor.patch.yaml
   - target:
       kind: HelmRelease
-    patch: thanos-side-car.patch.yaml
+    path: thanos-side-car.patch.yaml
