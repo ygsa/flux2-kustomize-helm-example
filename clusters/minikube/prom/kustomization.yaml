@@ -14,3 +14,6 @@ patches:
   - target:
       kind: HelmRelease
     path: thanos-service.patch.yaml 
+  - target:
+      kind: HelmRelease
+    path: resources.patch.yaml

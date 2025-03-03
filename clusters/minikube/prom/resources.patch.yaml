@@ -1,0 +1,6 @@
+- op: replace
+  path: /spec/values/prometheus/prometheusSpec/resources/limits/cpu
+  value: 4
+- op: replace
+  path: /spec/values/prometheus/prometheusSpec/resources/limits/memory
+  value: 5Gi
