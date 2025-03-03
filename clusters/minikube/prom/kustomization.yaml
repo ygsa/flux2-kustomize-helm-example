@@ -11,3 +11,6 @@ patches:
   - target:
       kind: HelmRelease
     path: thanos-side-car.patch.yaml
+  - target:
+      kind: HelmRelease
+    path: thanos-service.patch.yaml 
